@@ -29,6 +29,8 @@ import { RootState } from '@/store/store'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
 
+import { useTheme } from 'next-themes'
+
 const tabs = [
     { id: 'profile', name: 'Profile', icon: User },
     { id: 'security', name: 'Security', icon: Lock },
@@ -40,6 +42,7 @@ const tabs = [
 
 export default function SettingsPage() {
     const { user } = useSelector((state: RootState) => state.auth)
+    const { theme, setTheme } = useTheme()
     const [activeTab, setActiveTab] = useState('profile')
     const [loading, setLoading] = useState(false)
     const [name, setName] = useState('')
@@ -364,8 +367,30 @@ export default function SettingsPage() {
                                     </div>
                                 </div>
                                 <div className="flex gap-2">
-                                    <Button size="sm" variant="outline" className="font-bold text-xs h-8 px-4">Light</Button>
-                                    <Button size="sm" className="font-bold text-xs h-8 px-4">Dark</Button>
+                                    <Button
+                                        size="sm"
+                                        variant={theme === 'light' ? 'default' : 'outline'}
+                                        onClick={() => setTheme('light')}
+                                        className="font-bold text-xs h-8 px-4"
+                                    >
+                                        Light
+                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        variant={theme === 'dark' ? 'default' : 'outline'}
+                                        onClick={() => setTheme('dark')}
+                                        className="font-bold text-xs h-8 px-4"
+                                    >
+                                        Dark
+                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        variant={theme === 'system' ? 'default' : 'outline'}
+                                        onClick={() => setTheme('system')}
+                                        className="font-bold text-xs h-8 px-4"
+                                    >
+                                        System
+                                    </Button>
                                 </div>
                             </div>
                         </div>

@@ -132,46 +132,46 @@ function DashboardContent() {
 
                 {!query && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                        <Card className="border-none shadow-sm bg-indigo-50/50 dark:bg-indigo-950/20">
+                        <Card className="border-none shadow-sm bg-indigo-50/50 dark:bg-indigo-950/40">
                             <CardContent className="p-3 flex items-center gap-3">
-                                <div className="p-2 rounded-xl bg-indigo-600/10 text-indigo-600">
+                                <div className="p-2 rounded-xl bg-indigo-600/10 text-indigo-600 dark:text-indigo-400">
                                     <Zap className="h-4 w-4" />
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">AI Generations</p>
+                                    <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none mb-1">AI Generations</p>
                                     <p className="text-lg font-black leading-none">128</p>
                                 </div>
                             </CardContent>
                         </Card>
-                        <Card className="border-none shadow-sm bg-emerald-50/50 dark:bg-emerald-950/20">
+                        <Card className="border-none shadow-sm bg-emerald-50/50 dark:bg-emerald-950/40">
                             <CardContent className="p-3 flex items-center gap-3">
-                                <div className="p-2 rounded-xl bg-emerald-600/10 text-emerald-600">
+                                <div className="p-2 rounded-xl bg-emerald-600/10 text-emerald-600 dark:text-emerald-400">
                                     <Activity className="h-4 w-4" />
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">System Status</p>
-                                    <p className="text-lg font-black text-emerald-600 leading-none">Optimal</p>
+                                    <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none mb-1">System Status</p>
+                                    <p className="text-lg font-black text-emerald-600 dark:text-emerald-400 leading-none">Optimal</p>
                                 </div>
                             </CardContent>
                         </Card>
-                        <Card className="border-none shadow-sm bg-amber-50/50 dark:bg-amber-950/20">
+                        <Card className="border-none shadow-sm bg-amber-50/50 dark:bg-amber-950/40">
                             <CardContent className="p-3 flex items-center gap-3">
-                                <div className="p-2 rounded-xl bg-amber-600/10 text-amber-600">
+                                <div className="p-2 rounded-xl bg-amber-600/10 text-amber-600 dark:text-amber-400">
                                     <CreditCard className="h-4 w-4" />
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">Current Plan</p>
+                                    <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none mb-1">Current Plan</p>
                                     <p className="text-lg font-black leading-none">Pro</p>
                                 </div>
                             </CardContent>
                         </Card>
-                        <Card className="border-none shadow-sm bg-purple-50/50 dark:bg-purple-950/20">
+                        <Card className="border-none shadow-sm bg-purple-50/50 dark:bg-purple-950/40">
                             <CardContent className="p-3 flex items-center gap-3">
-                                <div className="p-2 rounded-xl bg-purple-600/10 text-purple-600">
+                                <div className="p-2 rounded-xl bg-purple-600/10 text-purple-600 dark:text-purple-400">
                                     <Clock className="h-4 w-4" />
                                 </div>
                                 <div>
-                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">Time Saved</p>
+                                    <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest leading-none mb-1">Time Saved</p>
                                     <p className="text-lg font-black leading-none">14.5 hrs</p>
                                 </div>
                             </CardContent>
@@ -271,11 +271,11 @@ function DashboardContent() {
 
 export default function DashboardPage() {
     return (
-        <div className="flex h-screen bg-slate-50 overflow-hidden text-slate-900">
+        <div className="flex h-screen bg-slate-50 dark:bg-slate-950 overflow-hidden text-slate-900 dark:text-slate-100">
             <Sidebar />
             <div className="flex-1 flex flex-col overflow-hidden">
                 <Navbar />
-                <Suspense fallback={<main className="flex-1 overflow-y-auto p-4 md:p-6">Loading dashboard...</main>}>
+                <Suspense fallback={<main className="flex-1 overflow-y-auto p-4 md:p-6 bg-slate-50 dark:bg-slate-950">Loading dashboard...</main>}>
                     <DashboardContent />
                 </Suspense>
             </div>

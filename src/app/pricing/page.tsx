@@ -61,7 +61,7 @@ export default function PricingPage() {
             <Sidebar />
             <div className="flex-1 flex flex-col overflow-hidden">
                 <Navbar />
-                <main className="flex-1 overflow-y-auto p-4 md:p-8">
+                <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-slate-50 dark:bg-slate-950">
                     <div className="max-w-[1600px] mx-auto space-y-10">
                         <div className="text-center space-y-2">
                             <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold">
