@@ -12,22 +12,28 @@ import { Button } from '@/components/ui/button'
 import { User, LogOut, Settings, History, Rocket } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
+import { clearAuth } from '@/store/slices/authSlice'
 
 export function UserDropdown() {
     const router = useRouter()
+    const dispatch = useDispatch()
     const { user, loading } = useSelector((state: RootState) => state.auth)
 
     const handleLogout = async () => {
+        // Clear Redux state immediately
+        dispatch(clearAuth())
+
         // Sign out from Supabase client
         await supabase.auth.signOut()
 
         // Clear the cookie that middleware relies on
         document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
-        // Force a hard navigation to clear all states and trigger middleware
-        window.location.href = '/login'
+        // Clean router redirect
+        router.push('/login')
+        router.refresh()
     }
 
     // We want the dropdown to be visible even if user is loading, 

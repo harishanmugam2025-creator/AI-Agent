@@ -3,18 +3,23 @@
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
+import { clearAuth } from '@/store/slices/authSlice'
 import { Brain } from 'lucide-react'
 import Link from 'next/link'
 
 export function Navbar() {
     const router = useRouter()
+    const dispatch = useDispatch()
     const { user } = useSelector((state: RootState) => state.auth)
 
     const handleLogout = async () => {
+        dispatch(clearAuth())
         await supabase.auth.signOut()
+        document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
         router.push('/login')
+        router.refresh()
     }
 
     return (
