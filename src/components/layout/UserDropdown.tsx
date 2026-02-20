@@ -28,15 +28,20 @@ export function UserDropdown() {
             console.error('Logout error:', error)
         } finally {
             // Force clear and redirect even if signout fails
+            // 1. Clear Redux
             dispatch(clearAuth())
-            router.push('/login')
-        }
-        // Clear the cookie that middleware relies on
-        document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 
-        // Clean router redirect
-        router.push('/login')
-        router.refresh()
+            // 2. Clear all browser storage
+            localStorage.clear()
+            sessionStorage.clear()
+
+            // 3. Clear the auth cookie
+            document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+
+            // 4. Redirect and Refresh
+            router.push('/login')
+            router.refresh()
+        }
     }
 
     // We want the dropdown to be visible even if user is loading, 

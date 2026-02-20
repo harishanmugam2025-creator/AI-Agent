@@ -19,12 +19,20 @@ export function Navbar() {
             await supabase.auth.signOut()
         } catch (error) {
             console.error('Logout error:', error)
-            // Manual cookie clearing as a fallback if signOut fails to clear it
-            document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
         } finally {
+            // 1. Clear Redux
             dispatch(clearAuth())
+
+            // 2. Clear all browser storage
+            localStorage.clear()
+            sessionStorage.clear()
+
+            // 3. Clear auth cookie
+            document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+
+            // 4. Redirect and Refresh
             router.push('/login')
-            router.refresh() // Refresh to ensure client-side state is fully reset
+            router.refresh()
         }
     }
 
