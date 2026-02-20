@@ -22,12 +22,15 @@ export function UserDropdown() {
     const { user, loading } = useSelector((state: RootState) => state.auth)
 
     const handleLogout = async () => {
-        // Clear Redux state immediately
-        dispatch(clearAuth())
-
-        // Sign out from Supabase client
-        await supabase.auth.signOut()
-
+        try {
+            await supabase.auth.signOut()
+        } catch (error) {
+            console.error('Logout error:', error)
+        } finally {
+            // Force clear and redirect even if signout fails
+            dispatch(clearAuth())
+            router.push('/login')
+        }
         // Clear the cookie that middleware relies on
         document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 

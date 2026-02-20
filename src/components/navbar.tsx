@@ -15,11 +15,17 @@ export function Navbar() {
     const { user } = useSelector((state: RootState) => state.auth)
 
     const handleLogout = async () => {
-        dispatch(clearAuth())
-        await supabase.auth.signOut()
-        document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-        router.push('/login')
-        router.refresh()
+        try {
+            await supabase.auth.signOut()
+        } catch (error) {
+            console.error('Logout error:', error)
+            // Manual cookie clearing as a fallback if signOut fails to clear it
+            document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+        } finally {
+            dispatch(clearAuth())
+            router.push('/login')
+            router.refresh() // Refresh to ensure client-side state is fully reset
+        }
     }
 
     return (

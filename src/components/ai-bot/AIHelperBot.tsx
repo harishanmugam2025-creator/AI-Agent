@@ -108,7 +108,7 @@ export function AIHelperBot() {
                         initial={{ y: 20, opacity: 0, scale: 0.95 }}
                         animate={{ y: 0, opacity: 1, scale: 1 }}
                         exit={{ y: 20, opacity: 0, scale: 0.95 }}
-                        className="w-[380px] h-[550px] shadow-2xl pointer-events-auto"
+                        className="w-[380px] h-[550px] shadow-2xl pointer-events-auto absolute bottom-0 right-0 origin-bottom-right"
                     >
                         <Card className="h-full border-slate-200 dark:border-slate-800 flex flex-col bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
                             <CardHeader className="p-4 border-b bg-primary/5 dark:bg-primary/10 flex flex-row items-center justify-between">

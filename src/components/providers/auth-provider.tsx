@@ -23,7 +23,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 pathname.startsWith('/settings') ||
                 pathname.startsWith('/profile') ||
                 pathname.startsWith('/history') ||
-                pathname.startsWith('/help')
+                pathname.startsWith('/help') ||
+                pathname.startsWith('/pricing')
 
             if (session) {
                 dispatch(setAuth({ user: session.user, session }))
@@ -48,15 +49,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     pathname.startsWith('/settings') ||
                     pathname.startsWith('/profile') ||
                     pathname.startsWith('/history') ||
-                    pathname.startsWith('/help')
+                    pathname.startsWith('/help') ||
+                    pathname.startsWith('/pricing')
+
                 if (session) {
                     dispatch(setAuth({ user: session.user, session }))
-                    if (event === 'SIGNED_IN' && (pathname === '/login' || pathname === '/register')) {
-                        router.push('/dashboard')
+                    if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
+                        if (pathname === '/login' || pathname === '/register') {
+                            router.push('/dashboard')
+                        }
                     }
                 } else {
                     dispatch(clearAuth())
-                    if (isProtectedRoute) {
+                    if (isProtectedRoute || event === 'SIGNED_OUT') {
                         router.push('/login')
                     }
                 }
