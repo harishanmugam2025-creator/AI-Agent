@@ -40,45 +40,79 @@ export default function LandingPage() {
 
         <section className="relative z-10 w-full pt-20 pb-12 md:pt-28 md:pb-16 lg:pt-32 lg:pb-20">
           <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex flex-col items-center space-y-8 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold shadow-sm mb-2">
-                <Sparkles className="h-4 w-4" />
-                <span>Introducing Generation History </span>
-              </div>
-              <div className="space-y-6 max-w-4xl mx-auto">
-                <h1 className="text-5xl font-extrabold tracking-tighter sm:text-6xl md:text-7xl lg:text-8xl text-slate-900 leading-tight">
-                  Your complete AI <br className="hidden sm:block" />
-                  <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary via-blue-600 to-indigo-600 pb-2">
-                    productivity suite.
-                  </span>
-                </h1>
-                <p className="mx-auto max-w-[700px] text-slate-500 md:text-xl font-medium leading-relaxed">
-                  NeuroBox AI brings together specialized agents to help you write, design, plan, and learn faster than ever before. Everything you need in one beautifully simple workspace.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto">
-                <Link href="/register" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full sm:w-auto h-14 px-8 font-bold text-base rounded-full shadow-xl shadow-primary/25 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                    Start for free <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link href="/login" className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 font-bold text-base rounded-full hover:bg-slate-50 transition-all duration-300">
-                    View Demo
-                  </Button>
-                </Link>
+            <div className="grid lg:grid-cols-5 gap-12 lg:gap-8 items-center">
+
+              {/* Left Content Column */}
+              <div className="flex flex-col items-center lg:items-start space-y-8 text-center lg:text-left lg:col-span-3">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold shadow-sm mb-2">
+                  <Sparkles className="h-4 w-4" />
+                  <span>Introducing Generation History </span>
+                </div>
+                <div className="space-y-6">
+                  <h1 className="text-5xl font-extrabold tracking-tighter sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl text-slate-900 leading-tight">
+                    Your complete AI <br className="hidden sm:block" />
+                    <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary via-blue-600 to-indigo-600 pb-2">
+                      productivity suite.
+                    </span>
+                  </h1>
+                  <p className="max-w-[600px] text-slate-500 md:text-xl font-medium leading-relaxed">
+                    NeuroBox AI brings together specialized agents to help you write, design, plan, and learn faster than ever before. Everything you need in one beautifully simple workspace.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto">
+                  <Link href="/register" className="w-full sm:w-auto">
+                    <Button size="lg" className="w-full sm:w-auto h-14 px-8 font-bold text-base rounded-full shadow-xl shadow-primary/25 hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                      Start for free <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </Link>
+                  <Link href="/login" className="w-full sm:w-auto">
+                    <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 font-bold text-base rounded-full hover:bg-slate-50 transition-all duration-300">
+                      View Demo
+                    </Button>
+                  </Link>
+                </div>
               </div>
 
-              {/* Dashboard Preview mockup */}
-              <div className="w-full max-w-5xl mx-auto mt-12 p-2 md:p-4 rounded-[2rem] bg-white/50 backdrop-blur-xl border border-slate-200/50 shadow-2xl">
-                <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 aspect-video relative flex items-center justify-center">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-slate-100 to-slate-50 opacity-80 z-0"></div>
-                  <div className="z-10 text-center">
-                    <Brain className="h-16 w-16 text-slate-300 mx-auto mb-4" />
-                    <p className="text-slate-400 font-bold text-lg">NeuroBox AI Workspace</p>
+              {/* Right Illustration Column */}
+              <div className="hidden lg:flex lg:col-span-2 relative items-center justify-center">
+                {/* Decorative glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-blue-500/20 to-primary/20 blur-3xl rounded-full -z-10" />
+
+                {/* Abstract UI representation */}
+                <div className="relative w-full aspect-square max-w-md">
+                  {/* Floating Elements */}
+                  <div className="absolute top-4 right-4 bg-white p-4 rounded-2xl shadow-xl border border-slate-100/50 w-48 float-animation pulse-glow cursor-default z-20">
+                    <div className="flex gap-3 items-center mb-3">
+                      <div className="p-2 bg-purple-100 rounded-lg"><Shield className="h-5 w-5 text-purple-600" /></div>
+                      <div className="h-4 w-20 bg-slate-100 rounded-full" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-2 w-full bg-slate-100 rounded-full" />
+                      <div className="h-2 w-4/5 bg-slate-100 rounded-full" />
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-10 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100/50 w-52 float-animation-delayed pulse-glow cursor-default z-20">
+                    <div className="flex gap-3 items-center mb-3">
+                      <div className="p-2 bg-emerald-100 rounded-lg"><Zap className="h-5 w-5 text-emerald-600" /></div>
+                      <div className="h-4 w-24 bg-slate-100 rounded-full" />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-2 w-full bg-slate-100 rounded-full" />
+                      <div className="h-2 w-2/3 bg-slate-100 rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* Central Main Panel */}
+                  <div className="absolute inset-8 bg-white/60 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white flex flex-col items-center justify-center overflow-hidden z-10 transition-transform duration-500 hover:scale-105 cursor-default">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-blue-500/5" />
+                    <Brain className="h-16 w-16 text-primary mb-4" />
+                    <p className="font-bold text-slate-800 text-lg">NeuroBox AI Hub</p>
+                    <p className="text-sm font-medium text-slate-500 mt-1">Status: Active</p>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </section>
