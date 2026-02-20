@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { Brain, Zap, Shield, Sparkles, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function LandingPage() {
   return (
@@ -49,7 +50,7 @@ export default function LandingPage() {
                   <span>Introducing Generation History </span>
                 </div>
                 <div className="space-y-6">
-                  <h1 className="text-5xl font-extrabold tracking-tighter sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl text-slate-900 leading-tight">
+                  <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl text-slate-900 leading-tight">
                     Your complete AI <br className="hidden sm:block" />
                     <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary via-blue-600 to-indigo-600 pb-2">
                       productivity suite.
@@ -77,29 +78,40 @@ export default function LandingPage() {
               <div className="hidden lg:flex lg:col-span-2 relative items-center justify-center">
                 {/* Decorative glow */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-blue-500/20 to-primary/20 blur-3xl rounded-full -z-10" />
+                {/* Hero Image from Unsplash */}
+                <Image src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Hero illustration" width={600} height={600} className="rounded-lg shadow-lg" />
 
                 {/* Abstract UI representation */}
                 <div className="relative w-full aspect-square max-w-md">
                   {/* Floating Elements */}
                   <div className="absolute top-4 right-4 bg-white p-4 rounded-2xl shadow-xl border border-slate-100/50 w-48 float-animation pulse-glow cursor-default z-20">
-                    <div className="flex gap-3 items-center mb-3">
+                    <div className="flex gap-3 items-center mb-1">
                       <div className="p-2 bg-purple-100 rounded-lg"><Shield className="h-5 w-5 text-purple-600" /></div>
-                      <div className="h-4 w-20 bg-slate-100 rounded-full" />
+                      <div className="font-bold text-slate-800 text-sm">Security Guard</div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="h-2 w-full bg-slate-100 rounded-full" />
-                      <div className="h-2 w-4/5 bg-slate-100 rounded-full" />
+                    <div className="space-y-1">
+                      <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Monitoring session...</div>
+                      <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div className="h-full bg-emerald-500 w-full animate-pulse" />
+                      </div>
+                      <div className="text-[9px] text-slate-400 font-medium">AES-256 Encryption active</div>
                     </div>
                   </div>
 
                   <div className="absolute bottom-10 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100/50 w-52 float-animation-delayed pulse-glow cursor-default z-20">
-                    <div className="flex gap-3 items-center mb-3">
+                    <div className="flex gap-3 items-center mb-1">
                       <div className="p-2 bg-emerald-100 rounded-lg"><Zap className="h-5 w-5 text-emerald-600" /></div>
-                      <div className="h-4 w-24 bg-slate-100 rounded-full" />
+                      <div className="font-bold text-slate-800 text-sm">Speed Optimizer</div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="h-2 w-full bg-slate-100 rounded-full" />
-                      <div className="h-2 w-2/3 bg-slate-100 rounded-full" />
+                    <div className="space-y-1">
+                      <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Processing task...</div>
+                      <div className="flex items-center gap-2">
+                        <div className="h-1.5 flex-1 bg-slate-100 rounded-full overflow-hidden">
+                          <div className="h-full bg-primary w-2/3" />
+                        </div>
+                        <span className="text-[9px] font-black text-primary">67%</span>
+                      </div>
+                      <div className="text-[9px] text-slate-400 font-medium">Latency: &lt; 0.8s</div>
                     </div>
                   </div>
 
@@ -199,12 +211,35 @@ export default function LandingPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {[
-                { quote: "NeuroBox completely changed how I write my weekly newsletters. The output is spot on every single time.", author: "Sarah Jenkins", role: "Content Marketer" },
-                { quote: "I used to spend hours drafting project specs. Now the AI PM agent handles the heavy lifting in 30 seconds.", author: "David Chen", role: "Product Manager" },
-                { quote: "The most beautiful AI interface I've used. It's so much easier than managing huge prompt libraries.", author: "Elena Rodriguez", role: "Freelance Designer" }
+                {
+                  quote: "NeuroBox completely changed how I write my weekly newsletters. The output is spot on every single time.",
+                  author: "Sarah Jenkins",
+                  role: "Content Marketer",
+                  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+                },
+                {
+                  quote: "I used to spend hours drafting project specs. Now the AI PM agent handles the heavy lifting in 30 seconds.",
+                  author: "David Chen",
+                  role: "Product Manager",
+                  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+                },
+                {
+                  quote: "The most beautiful AI interface I've used. It's so much easier than managing huge prompt libraries.",
+                  author: "Elena Rodriguez",
+                  role: "Freelance Designer",
+                  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
+                }
               ].map((t, i) => (
-                <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                  <div className="flex text-amber-400 mb-4">
+                <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                  <div className="relative w-16 h-16 mb-4">
+                    <Image
+                      src={t.image}
+                      alt={t.author}
+                      fill
+                      className="rounded-full object-cover border-2 border-primary/10"
+                    />
+                  </div>
+                  <div className="flex text-amber-400 mb-4 justify-center">
                     {[...Array(5)].map((_, j) => <Sparkles key={j} className="h-4 w-4 fill-current" />)}
                   </div>
                   <p className="text-slate-700 italic mb-6">"{t.quote}"</p>

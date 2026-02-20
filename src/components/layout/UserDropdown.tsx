@@ -37,9 +37,13 @@ export function UserDropdown() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 p-0 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700">
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 p-0 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700 overflow-hidden">
                     <div className="flex items-center justify-center w-full h-full text-xs font-bold text-primary">
-                        {user?.email?.[0].toUpperCase() || <User className="h-5 w-5" />}
+                        {user?.user_metadata?.avatar_url ? (
+                            <img src={user.user_metadata.avatar_url} alt="Avatar" className="h-full w-full object-cover" />
+                        ) : (
+                            user?.email?.[0].toUpperCase() || <User className="h-5 w-5" />
+                        )}
                     </div>
                 </Button>
             </DropdownMenuTrigger>

@@ -15,8 +15,14 @@ import {
     BookOpen,
     GraduationCap,
     Sparkles,
-    SearchX
+    SearchX,
+    Activity,
+    CreditCard,
+    Zap,
+    Clock,
+    History
 } from 'lucide-react'
+import { Card, CardContent } from "@/components/ui/card"
 
 const tools = [
     {
@@ -124,18 +130,137 @@ function DashboardContent() {
                     </div>
                 </div>
 
-                {filteredTools.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
-                        {filteredTools.map((tool) => (
-                            <ToolCard key={tool.href} {...tool} />
-                        ))}
+                {!query && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <Card className="border-none shadow-sm bg-indigo-50/50 dark:bg-indigo-950/20">
+                            <CardContent className="p-3 flex items-center gap-3">
+                                <div className="p-2 rounded-xl bg-indigo-600/10 text-indigo-600">
+                                    <Zap className="h-4 w-4" />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">AI Generations</p>
+                                    <p className="text-lg font-black leading-none">128</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card className="border-none shadow-sm bg-emerald-50/50 dark:bg-emerald-950/20">
+                            <CardContent className="p-3 flex items-center gap-3">
+                                <div className="p-2 rounded-xl bg-emerald-600/10 text-emerald-600">
+                                    <Activity className="h-4 w-4" />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">System Status</p>
+                                    <p className="text-lg font-black text-emerald-600 leading-none">Optimal</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card className="border-none shadow-sm bg-amber-50/50 dark:bg-amber-950/20">
+                            <CardContent className="p-3 flex items-center gap-3">
+                                <div className="p-2 rounded-xl bg-amber-600/10 text-amber-600">
+                                    <CreditCard className="h-4 w-4" />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">Current Plan</p>
+                                    <p className="text-lg font-black leading-none">Pro</p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                        <Card className="border-none shadow-sm bg-purple-50/50 dark:bg-purple-950/20">
+                            <CardContent className="p-3 flex items-center gap-3">
+                                <div className="p-2 rounded-xl bg-purple-600/10 text-purple-600">
+                                    <Clock className="h-4 w-4" />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none mb-1">Time Saved</p>
+                                    <p className="text-lg font-black leading-none">14.5 hrs</p>
+                                </div>
+                            </CardContent>
+                        </Card>
                     </div>
-                ) : (
-                    <div className="flex flex-col items-center justify-center py-24 text-center text-slate-400 gap-4">
-                        <SearchX className="h-14 w-14 opacity-20" />
-                        <div>
-                            <h3 className="text-lg font-bold mb-1">No tools found</h3>
-                            <p className="text-sm">Try a different search term like "email", "blog", or "story".</p>
+                )}
+
+                <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                        <h2 className="text-lg font-black tracking-tight flex items-center gap-2">
+                            <Sparkles className="h-5 w-5 text-primary" />
+                            {query ? 'Search Results' : 'Specialized AI Agents'}
+                        </h2>
+                        {!query && (
+                            <div className="h-px flex-1 bg-slate-100 dark:bg-slate-800 mx-6" />
+                        )}
+                    </div>
+
+                    {filteredTools.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
+                            {filteredTools.map((tool) => (
+                                <ToolCard key={tool.href} {...tool} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center justify-center py-24 text-center text-slate-400 gap-4">
+                            <SearchX className="h-14 w-14 opacity-20" />
+                            <div>
+                                <h3 className="text-lg font-bold mb-1">No tools found</h3>
+                                <p className="text-sm">Try a different search term like "email", "blog", or "story".</p>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {!query && (
+                    <div className="pt-8 space-y-4">
+                        <div className="flex items-center justify-between">
+                            <h2 className="text-lg font-black tracking-tight flex items-center gap-2 uppercase">
+                                <History className="h-5 w-5 text-slate-400" />
+                                Recent Activity
+                            </h2>
+                            <div className="h-px flex-1 bg-slate-100 dark:bg-slate-800 mx-6" />
+                        </div>
+                        <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                            <div className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
+                                <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-10 w-10 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600">
+                                            <Mail className="h-5 w-5" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-bold">Email Generated: Partner Outreach</p>
+                                            <p className="text-xs text-slate-500">24 minutes ago</p>
+                                        </div>
+                                    </div>
+                                    <div className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-black uppercase text-slate-500">
+                                        Email Reply
+                                    </div>
+                                </div>
+                                <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-10 w-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-600">
+                                            <Utensils className="h-5 w-5" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-bold">Meal Plan: Keto Transformation</p>
+                                            <p className="text-xs text-slate-500">2 hours ago</p>
+                                        </div>
+                                    </div>
+                                    <div className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-black uppercase text-slate-500">
+                                        Meal Planner
+                                    </div>
+                                </div>
+                                <div className="p-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors cursor-pointer">
+                                    <div className="flex items-center gap-4">
+                                        <div className="h-10 w-10 rounded-xl bg-orange-50 dark:bg-orange-900/20 flex items-center justify-center text-orange-600">
+                                            <Briefcase className="h-5 w-5" />
+                                        </div>
+                                        <div>
+                                            <p className="text-sm font-bold">Business Name: NovaCloud Systems</p>
+                                            <p className="text-xs text-slate-500">Yesterday</p>
+                                        </div>
+                                    </div>
+                                    <div className="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-full text-[10px] font-black uppercase text-slate-500">
+                                        Business Name
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )}

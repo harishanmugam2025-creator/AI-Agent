@@ -19,23 +19,46 @@ function HistoryContent() {
     const [generations, setGenerations] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     const [searchQuery, setSearchQuery] = useState('')
+    const [tableMissing, setTableMissing] = useState(false)
     const { user } = useSelector((state: RootState) => state.auth)
 
     const fetchHistory = async () => {
         if (!user) return
         setLoading(true)
-        const { data, error } = await supabase
-            .from('generations')
-            .select('*')
-            .eq('user_id', user.id)
-            .order('created_at', { ascending: false })
+        setTableMissing(false)
 
-        if (error) {
-            toast.error('Failed to fetch history')
-        } else {
-            setGenerations(data || [])
+        try {
+            const { data, error } = await supabase
+                .from('generations')
+                .select('*')
+                .eq('user_id', user.id)
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                // Detect missing table: PostgREST returns various codes/messages
+                const msg = (error.message || '').toLowerCase()
+                const code = error.code || ''
+                const isMissingTable =
+                    code === '42P01' ||
+                    code === 'PGRST204' ||
+                    msg.includes('does not exist') ||
+                    msg.includes('relation') ||
+                    msg.includes('not found')
+
+                if (isMissingTable) {
+                    setTableMissing(true)
+                } else {
+                    toast.error('Failed to fetch history')
+                }
+            } else {
+                setGenerations(data || [])
+            }
+        } catch (err) {
+            console.error('History fetch catch:', err)
+            toast.error('An unexpected error occurred')
+        } finally {
+            setLoading(false)
         }
-        setLoading(false)
     }
 
     useEffect(() => {
@@ -122,16 +145,42 @@ function HistoryContent() {
                             </Card>
                         ))}
                     </div>
+                ) : tableMissing ? (
+                    <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-[32px] border-2 border-dashed border-slate-200 dark:border-slate-800">
+                        <div className="h-16 w-16 bg-amber-50 dark:bg-amber-950/30 rounded-2xl flex items-center justify-center mx-auto mb-6 text-amber-600">
+                            <HistoryIcon className="h-8 w-8" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">Database Setup Required</h3>
+                        <p className="text-slate-500 max-w-md mx-auto text-sm font-medium leading-relaxed px-6">
+                            The <code className="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-primary font-bold">generations</code> table doesn't exist yet.
+                            Please run the <code className="text-primary font-bold">SUPABASE_SETUP.sql</code> script in your Supabase SQL Editor to enable history.
+                        </p>
+                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+                            <Button onClick={fetchHistory} variant="outline" className="font-bold px-8">
+                                Refresh Status
+                            </Button>
+                            <Button asChild className="font-bold px-8 shadow-lg shadow-primary/20">
+                                <a href="https://supabase.com/dashboard/project/_/sql/new" target="_blank" rel="noopener noreferrer">
+                                    Open SQL Editor
+                                </a>
+                            </Button>
+                        </div>
+                    </div>
                 ) : (
-                    <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-800">
-                        <HistoryIcon className="h-12 w-12 mx-auto text-slate-300 mb-4" />
+                    <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-[32px] border-2 border-dashed border-slate-200 dark:border-slate-800">
+                        <div className="h-16 w-16 bg-slate-50 dark:bg-slate-800/50 rounded-2xl flex items-center justify-center mx-auto mb-6 text-slate-300">
+                            <HistoryIcon className="h-8 w-8" />
+                        </div>
                         <h3 className="text-lg font-bold">No history found</h3>
-                        <p className="text-slate-500 max-w-xs mx-auto mt-2">
+                        <p className="text-slate-500 max-w-xs mx-auto mt-2 text-sm font-medium">
                             When you generate content using our AI agents, they will appear here.
                         </p>
-                        <Link href="/dashboard">
-                            <Button className="mt-6">Try an AI Tool</Button>
-                        </Link>
+                        <div className="mt-8 flex gap-3 justify-center">
+                            <Button variant="outline" onClick={fetchHistory} className="font-bold">Retry</Button>
+                            <Link href="/dashboard">
+                                <Button className="font-bold shadow-lg shadow-primary/20">Try an AI Tool</Button>
+                            </Link>
+                        </div>
                     </div>
                 )}
             </div>
