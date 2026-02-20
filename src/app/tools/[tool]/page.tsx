@@ -234,10 +234,10 @@ export default function DynamicToolPage() {
                                 </div>
 
                                 {/* Result Section */}
-                                <div className="flex flex-col">
+                                <div className="flex flex-col h-full min-h-[500px] lg:min-h-0">
                                     {(isLoading || result) ? (
-                                        <Card className="border-slate-200 flex-1 flex flex-col">
-                                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 border-b bg-slate-50">
+                                        <Card className="border-slate-200 flex-1 flex flex-col overflow-hidden max-h-[600px]">
+                                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 border-b bg-slate-50 shrink-0">
                                                 <CardTitle className="text-base">AI Response</CardTitle>
                                                 {result && (
                                                     <div className="flex items-center gap-2">
@@ -247,7 +247,7 @@ export default function DynamicToolPage() {
                                                     </div>
                                                 )}
                                             </CardHeader>
-                                            <CardContent className="pt-6 flex-1 overflow-y-auto">
+                                            <CardContent className="pt-6 flex-1 overflow-y-auto custom-scrollbar">
                                                 {isLoading ? (
                                                     <div className="space-y-4">
                                                         <Skeleton className="h-4 w-full" />
@@ -263,7 +263,7 @@ export default function DynamicToolPage() {
                                             </CardContent>
                                         </Card>
                                     ) : (
-                                        <div className="flex-1 border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-12 text-center text-slate-400">
+                                        <div className="flex-1 border-2 border-dashed border-slate-200 rounded-3xl flex flex-col items-center justify-center p-12 text-center text-slate-400 min-h-[400px]">
                                             <Sparkles className="h-16 w-16 mb-4 opacity-10" />
                                             <h3 className="text-xl font-bold mb-2">Ready to Generate</h3>
                                             <p className="max-w-[250px]">Your results will appear here after you click generate.</p>
