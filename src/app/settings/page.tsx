@@ -48,18 +48,18 @@ export default function SettingsPage() {
             <Sidebar />
             <div className="flex-1 flex flex-col overflow-hidden">
                 <Navbar />
-                <main className="flex-1 overflow-y-auto p-4 md:p-8">
-                    <div className="max-w-4xl mx-auto space-y-8">
+                <main className="flex-1 overflow-y-auto p-4 md:p-6">
+                    <div className="max-w-[1600px] mx-auto space-y-6">
                         <div>
-                            <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-                            <p className="text-slate-500 mt-1 font-medium">Fine-tune your NeuroBox experience.</p>
+                            <h1 className="text-xl font-bold tracking-tight">Settings</h1>
+                            <p className="text-sm text-slate-500 mt-1 font-medium">Fine-tune your NeuroBox experience.</p>
                         </div>
 
-                        <div className="space-y-8">
+                        <div className="space-y-6">
                             {settingsGroups.map((group) => (
-                                <div key={group.title} className="space-y-4">
+                                <div key={group.title} className="space-y-3">
                                     <h2 className="text-sm font-black uppercase tracking-widest text-slate-400">{group.title}</h2>
-                                    <div className="grid grid-cols-1 gap-4">
+                                    <div className="grid grid-cols-1 gap-3">
                                         {group.items.map((item) => (
                                             <Card key={item.name} className="group cursor-pointer hover:border-primary/30 transition-all bg-white dark:bg-slate-900 shadow-sm hover:shadow-md">
                                                 <CardContent className="p-4 flex items-center justify-between">
@@ -84,7 +84,7 @@ export default function SettingsPage() {
                             ))}
                         </div>
 
-                        <div className="pt-8 text-center text-xs text-slate-400 font-medium pb-8">
+                        <div className="pt-6 text-center text-xs text-slate-400 font-medium pb-6">
                             Version 1.0.4 (Enterprise) • Built with ❤️ for AI productivity
                         </div>
                     </div>

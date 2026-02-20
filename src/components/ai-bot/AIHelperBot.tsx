@@ -5,10 +5,6 @@ import {
     Bot,
     X,
     Send,
-    MessageSquare,
-    Minimize2,
-    Sparkles,
-    User
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
@@ -32,7 +28,7 @@ export function AIHelperBot() {
     ])
     const [isLoading, setIsLoading] = useState(false)
     const scrollRef = useRef<HTMLDivElement>(null)
-    const { user } = useSelector((state: RootState) => state.auth)
+    const { user, loading: authLoading } = useSelector((state: RootState) => state.auth)
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -43,25 +39,44 @@ export function AIHelperBot() {
     const handleSend = async () => {
         if (!input.trim() || isLoading) return
 
-        const userMessage: Message = { role: 'user', content: input }
+        // Capture the message text BEFORE clearing input
+        const messageText = input.trim()
+        const userMessage: Message = { role: 'user', content: messageText }
         setMessages(prev => [...prev, userMessage])
         setInput('')
         setIsLoading(true)
 
         try {
-            // For the helper bot, we can use a simpler system prompt or a dedicated route
-            // For now, let's use a simple one-off generation or simulated response
-            // or we can reuse /api/generate with a special toolId 'helper'
+            // If auth is still loading, wait for it
+            if (authLoading) {
+                setMessages(prev => [...prev, {
+                    role: 'assistant',
+                    content: "Connecting to your session, please wait a moment..."
+                }])
+                setIsLoading(false)
+                return
+            }
+
+            if (!user?.id) {
+                setMessages(prev => [...prev, {
+                    role: 'assistant',
+                    content: "You need to be logged in to use this feature. Please sign in to continue."
+                }])
+                setIsLoading(false)
+                return
+            }
 
             const response = await axios.post('/api/generate', {
                 tool: 'helper',
-                inputs: { question: input },
-                userId: user?.id
+                inputs: { question: messageText },
+                userId: user.id
             })
-
             setMessages(prev => [...prev, { role: 'assistant', content: response.data.result }])
         } catch (error) {
-            setMessages(prev => [...prev, { role: 'assistant', content: "Sorry, I'm having trouble connecting right now. Please try again later." }])
+            setMessages(prev => [...prev, {
+                role: 'assistant',
+                content: "I'm having trouble connecting to the AI. Please check your API key or try again."
+            }])
         } finally {
             setIsLoading(false)
         }
@@ -101,7 +116,7 @@ export function AIHelperBot() {
                                         <Bot className="h-5 w-5 text-white" />
                                     </div>
                                     <div>
-                                        <CardTitle className="text-base font-bold">NeuroBox Helper</CardTitle>
+                                        <CardTitle className="text-sm font-bold">NeuroBox Helper</CardTitle>
                                         <div className="flex items-center gap-1.5">
                                             <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
                                             <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Online</span>
@@ -119,7 +134,7 @@ export function AIHelperBot() {
                                         msg.role === 'user' ? "justify-end" : "justify-start"
                                     )}>
                                         <div className={cn(
-                                            "max-w-[80%] p-3 rounded-2xl text-sm leading-relaxed",
+                                            "max-w-[80%] p-3 rounded-2xl text-[13px] leading-relaxed",
                                             msg.role === 'user'
                                                 ? "bg-primary text-white rounded-tr-none shadow-md"
                                                 : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-tl-none shadow-sm"

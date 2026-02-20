@@ -61,21 +61,21 @@ export default function PricingPage() {
             <Sidebar />
             <div className="flex-1 flex flex-col overflow-hidden">
                 <Navbar />
-                <main className="flex-1 overflow-y-auto p-4 md:p-8">
-                    <div className="max-w-6xl mx-auto space-y-12">
+                <main className="flex-1 overflow-y-auto p-4 md:p-6">
+                    <div className="max-w-[1600px] mx-auto space-y-8">
                         <div className="text-center space-y-4">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold">
                                 <Rocket className="h-4 w-4" /> Simple Pricing
                             </div>
-                            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+                            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
                                 Unlock the Full Power of AI
                             </h1>
-                            <p className="text-xl text-slate-500 max-w-2xl mx-auto font-medium">
+                            <p className="text-base text-slate-500 max-w-2xl mx-auto font-medium">
                                 Choose the plan that fits your needs. Scale your productivity with unlimited access to specialized agents.
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {plans.map((plan) => (
                                 <Card
                                     key={plan.name}
@@ -90,9 +90,9 @@ export default function PricingPage() {
                                         </div>
                                     )}
                                     <CardHeader>
-                                        <CardTitle className="text-2xl font-bold">{plan.name}</CardTitle>
+                                        <CardTitle className="text-lg font-bold">{plan.name}</CardTitle>
                                         <div className="flex items-baseline gap-1 mt-4">
-                                            <span className="text-4xl font-black">{plan.price}</span>
+                                            <span className="text-3xl font-black">{plan.price}</span>
                                             <span className="text-slate-500 font-medium">/month</span>
                                         </div>
                                         <p className="text-slate-500 text-sm mt-2">{plan.description}</p>

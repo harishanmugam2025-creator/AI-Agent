@@ -50,7 +50,7 @@ export function ToolForm({ toolId, fields, onSubmit, isLoading }: ToolFormProps)
                             name={field.name}
                             render={({ field: formField }) => (
                                 <FormItem>
-                                    <FormLabel className="text-slate-700 font-semibold">{field.label}</FormLabel>
+                                    <FormLabel className="text-sm text-slate-700 font-semibold">{field.label}</FormLabel>
                                     <FormControl>
                                         {field.type === 'textarea' ? (
                                             <Textarea
@@ -75,7 +75,7 @@ export function ToolForm({ toolId, fields, onSubmit, isLoading }: ToolFormProps)
                 <Button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full h-12 text-lg font-bold shadow-md hover:shadow-lg transition-all"
+                    className="w-full h-11 text-base font-bold shadow-md hover:shadow-lg transition-all"
                 >
                     {isLoading ? (
                         <span className="flex items-center gap-2">

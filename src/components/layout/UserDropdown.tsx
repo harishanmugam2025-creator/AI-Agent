@@ -17,20 +17,30 @@ import { RootState } from '@/store/store'
 
 export function UserDropdown() {
     const router = useRouter()
-    const { user } = useSelector((state: RootState) => state.auth)
+    const { user, loading } = useSelector((state: RootState) => state.auth)
 
     const handleLogout = async () => {
+        // Sign out from Supabase client
         await supabase.auth.signOut()
-        router.push('/login')
+
+        // Clear the cookie that middleware relies on
+        document.cookie = 'sb-brgerllbgweddtagdbhj-auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+
+        // Force a hard navigation to clear all states and trigger middleware
+        window.location.href = '/login'
     }
 
-    if (!user) return null
+    // We want the dropdown to be visible even if user is loading, 
+    // showing a placeholder until the user state is populated.
+    // if (!user) return null
 
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full bg-slate-100 p-0">
-                    <User className="h-5 w-5 text-slate-600" />
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full bg-slate-100 dark:bg-slate-800 p-0 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all border border-slate-200 dark:border-slate-700">
+                    <div className="flex items-center justify-center w-full h-full text-xs font-bold text-primary">
+                        {user?.email?.[0].toUpperCase() || <User className="h-5 w-5" />}
+                    </div>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -38,7 +48,7 @@ export function UserDropdown() {
                     <div className="flex flex-col space-y-1">
                         <p className="text-sm font-medium leading-none">Account</p>
                         <p className="text-xs leading-none text-muted-foreground">
-                            {user.email}
+                            {loading ? 'Loading...' : (user?.email || 'Not logged in')}
                         </p>
                     </div>
                 </DropdownMenuLabel>

@@ -3,13 +3,16 @@
 import { useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useDispatch } from 'react-redux'
-import { setAuth, clearAuth } from '@/store/slices/authSlice'
+import { setAuth, clearAuth, setLoading } from '@/store/slices/authSlice'
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        // Check active sessions and sets the user
+        // Start as loading = true (already initial state)
+        dispatch(setLoading(true))
+
+        // Check for an existing active session
         supabase.auth.getSession().then(({ data: { session } }) => {
             if (session) {
                 dispatch(setAuth({ user: session.user, session }))
@@ -18,7 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             }
         })
 
-        // Listen for changes on auth state (logged in, signed out, etc.)
+        // Listen for auth state changes (login, logout, token refresh)
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             (_event, session) => {
                 if (session) {

@@ -16,9 +16,9 @@ import {
     FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from 'sonner'
 import Link from 'next/link'
+import { Brain, Sparkles, Zap, Shield } from 'lucide-react'
 
 const formSchema = z.object({
     email: z.string().email({
@@ -69,25 +69,68 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-50 p-4">
-            <Card className="w-full max-w-md">
-                <CardHeader className="space-y-1">
-                    <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
-                    <CardDescription className="text-center">
-                        Enter your details to register for NeuroBox AI
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
+        <div className="flex min-h-screen bg-white flex-row-reverse">
+            {/* Right side - Branded Visual (mirrored from login) */}
+            <div className="hidden lg:flex w-1/2 relative bg-slate-950 flex-col justify-between p-12 overflow-hidden">
+                {/* Decorative background elements */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#4f46e5_0%,transparent_40%),radial-gradient(circle_at_bottom_left,#2563eb_0%,transparent_40%)] opacity-30"></div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_left,#ffffff0a_1px,transparent_1px),linear-gradient(to_top,#ffffff0a_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+
+                <div className="relative z-10 flex items-center justify-end gap-3 w-full">
+                    <span className="text-2xl font-extrabold tracking-tight text-white">
+                        NeuroBox <span className="text-primary font-black">AI</span>
+                    </span>
+                    <div className="bg-gradient-to-br from-primary to-blue-600 p-2 rounded-xl shadow-lg shadow-primary/20">
+                        <Brain className="h-6 w-6 text-white" />
+                    </div>
+                </div>
+
+                <div className="relative z-10 space-y-8 mt-12 max-w-lg ml-auto text-right">
+                    <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+                        Start building your AI ideas today.
+                    </h1>
+                    <p className="text-lg text-slate-300 font-medium leading-relaxed">
+                        Join thousands of creators using NeuroBox AI to automate their workflows and scale their productivity.
+                    </p>
+                </div>
+
+                <div className="relative z-10 text-slate-400 text-sm font-medium mt-12 flex justify-end gap-6 w-full">
+                    <span>© 2026 NeuroBox AI Inc.</span>
+                </div>
+            </div>
+
+            {/* Left side - Form */}
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-24 bg-slate-50 relative">
+                {/* Mobile Header (Hidden on Desktop) */}
+                <div className="absolute top-8 left-8 flex lg:hidden items-center gap-2">
+                    <div className="bg-gradient-to-br from-primary to-blue-600 p-1.5 rounded-lg shadow-sm">
+                        <Brain className="h-5 w-5 text-white" />
+                    </div>
+                    <span className="text-lg font-extrabold tracking-tight text-slate-900">
+                        NeuroBox AI
+                    </span>
+                </div>
+
+                <div className="w-full max-w-md space-y-10">
+                    <div className="space-y-3 text-center lg:text-left">
+                        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">Create an account</h2>
+                        <p className="text-slate-500 font-medium text-base">Enter your details to register for NeuroBox AI</p>
+                    </div>
+
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                             <FormField
                                 control={form.control}
                                 name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Email</FormLabel>
+                                        <FormLabel className="font-bold text-slate-700 w-full text-left inline-block">Email address</FormLabel>
                                         <FormControl>
-                                            <Input placeholder="name@example.com" {...field} />
+                                            <Input
+                                                className="h-12 bg-white border-slate-200 focus:border-primary focus:ring-primary shadow-sm rounded-xl px-4 font-medium transition-all"
+                                                placeholder="name@example.com"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -98,9 +141,14 @@ export default function RegisterPage() {
                                 name="password"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Password</FormLabel>
+                                        <FormLabel className="font-bold text-slate-700 w-full text-left inline-block">Password</FormLabel>
                                         <FormControl>
-                                            <Input type="password" placeholder="••••••••" {...field} />
+                                            <Input
+                                                className="h-12 bg-white border-slate-200 focus:border-primary focus:ring-primary shadow-sm rounded-xl px-4 font-medium transition-all"
+                                                type="password"
+                                                placeholder="••••••••"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -111,29 +159,40 @@ export default function RegisterPage() {
                                 name="confirmPassword"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Confirm Password</FormLabel>
+                                        <FormLabel className="font-bold text-slate-700 w-full text-left inline-block">Confirm Password</FormLabel>
                                         <FormControl>
-                                            <Input type="password" placeholder="••••••••" {...field} />
+                                            <Input
+                                                className="h-12 bg-white border-slate-200 focus:border-primary focus:ring-primary shadow-sm rounded-xl px-4 font-medium transition-all"
+                                                type="password"
+                                                placeholder="••••••••"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
                                 )}
                             />
-                            <Button type="submit" className="w-full" disabled={isLoading}>
-                                {isLoading ? 'Creating account...' : 'Register'}
+
+                            <Button
+                                type="submit"
+                                className="w-full h-12 text-base font-bold rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 transition-all active:scale-[0.98] active:translate-y-0"
+                                disabled={isLoading}
+                            >
+                                {isLoading ? 'Creating account...' : 'Create Account'}
                             </Button>
                         </form>
                     </Form>
-                </CardContent>
-                <CardFooter className="flex flex-col space-y-2">
-                    <div className="text-sm text-center text-slate-600">
-                        Already have an account?{' '}
-                        <Link href="/login" className="text-primary hover:underline font-medium">
-                            Login
-                        </Link>
+
+                    <div className="text-center pt-4">
+                        <p className="text-sm font-medium text-slate-600">
+                            Already have an account?{' '}
+                            <Link href="/login" className="text-primary font-bold hover:underline transition-all">
+                                Log in
+                            </Link>
+                        </p>
                     </div>
-                </CardFooter>
-            </Card>
+                </div>
+            </div>
         </div>
     )
 }
