@@ -83,13 +83,14 @@ export function AIHelperBot() {
     }
 
     return (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end justify-end pointer-events-none">
             <AnimatePresence>
                 {!isOpen && (
                     <motion.div
                         initial={{ scale: 0, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
+                        className="pointer-events-auto"
                     >
                         <Button
                             onClick={() => setIsOpen(true)}
@@ -107,7 +108,7 @@ export function AIHelperBot() {
                         initial={{ y: 20, opacity: 0, scale: 0.95 }}
                         animate={{ y: 0, opacity: 1, scale: 1 }}
                         exit={{ y: 20, opacity: 0, scale: 0.95 }}
-                        className="w-[380px] h-[550px] shadow-2xl"
+                        className="w-[380px] h-[550px] shadow-2xl pointer-events-auto"
                     >
                         <Card className="h-full border-slate-200 dark:border-slate-800 flex flex-col bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
                             <CardHeader className="p-4 border-b bg-primary/5 dark:bg-primary/10 flex flex-row items-center justify-between">
