@@ -41,9 +41,12 @@ function HistoryContent() {
                 const isMissingTable =
                     code === '42P01' ||
                     code === 'PGRST204' ||
+                    code === 'PGRST205' ||
                     msg.includes('does not exist') ||
                     msg.includes('relation') ||
-                    msg.includes('not found')
+                    msg.includes('not found') ||
+                    msg.includes('not find') ||
+                    msg.includes('could not find')
 
                 if (isMissingTable) {
                     setTableMissing(true)
